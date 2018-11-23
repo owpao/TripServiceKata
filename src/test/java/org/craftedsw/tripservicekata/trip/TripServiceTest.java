@@ -38,10 +38,10 @@ public class TripServiceTest {
 
 	@Test
 	public void shouldNotReturnAnyTripsWhenUsersAreNotFriends(){
-
-		User friend = new User();
-		friend.addFriend(ANOTHER_USER);
-		friend.addTrip(TRIP_TO_JERUSALEM);
+		User friend = UserBuilder.aUser()
+								.friendsWith(ANOTHER_USER)
+								.withTrips(TRIP_TO_JERUSALEM)
+								.build();
 		//when
 		List<Trip> friendTrips = tripService.getTripsByUser(friend);
 		assertThat(friendTrips.size(),is(0));
@@ -49,11 +49,10 @@ public class TripServiceTest {
 
 	@Test
 	public void shouldReturnAnyTripsWhenUsersAreFriends(){
-		User friend = new User();
-		friend.addFriend(loggedInUser);
-		friend.addFriend(ANOTHER_USER);
-		friend.addTrip(TRIP_TO_JERUSALEM);
-		friend.addTrip(TRIP_TO_COTABATO);
+		User friend  = UserBuilder.aUser()
+									.friendsWith(ANOTHER_USER,loggedInUser)
+									.withTrips(TRIP_TO_JERUSALEM, TRIP_TO_COTABATO)
+									.build();
 		//when
 		List<Trip> friendTrips = tripService.getTripsByUser(friend);
 		assertThat(friendTrips.size(),is(2));
@@ -70,4 +69,5 @@ public class TripServiceTest {
 			return user.trips();
 		}
 	}
+
 }
