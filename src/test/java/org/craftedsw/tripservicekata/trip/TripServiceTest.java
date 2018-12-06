@@ -33,7 +33,7 @@ public class TripServiceTest {
 		//given
 		loggedInUser = GUEST;
 	    //when
-        tripService.getTripsByUser(UNUSED_USER);
+        tripService.getTripsByUser(UNUSED_USER, loggedInUser);
 	}
 
 	@Test
@@ -43,7 +43,7 @@ public class TripServiceTest {
 								.withTrips(TRIP_TO_JERUSALEM)
 								.build();
 		//when
-		List<Trip> friendTrips = tripService.getTripsByUser(friend);
+		List<Trip> friendTrips = tripService.getTripsByUser(friend,loggedInUser);
 		assertThat(friendTrips.size(),is(0));
 	}
 
@@ -54,7 +54,7 @@ public class TripServiceTest {
 									.withTrips(TRIP_TO_JERUSALEM, TRIP_TO_COTABATO)
 									.build();
 		//when
-		List<Trip> friendTrips = tripService.getTripsByUser(friend);
+		List<Trip> friendTrips = tripService.getTripsByUser(friend, loggedInUser);
 		assertThat(friendTrips.size(),is(2));
 	}
 

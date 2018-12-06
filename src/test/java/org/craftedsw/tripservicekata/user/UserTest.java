@@ -13,17 +13,17 @@ public class UserTest {
 
     @Test
     public void
-    shouldInformWhenUsersAreNotFriends(){
+    shouldInformWhenUsersAreNotFriends() {
         User user = UserBuilder.aUser()
-                                .friendsWith(PAO)
-                                .build();
+                .friendsWith(PAO)
+                .build();
 
         assertThat(user.isFriendsWith(JOBERT), is(false));
     }
 
     @Test
     public void
-    shouldInformWhenUsersAreFriends(){
+    shouldInformWhenUsersAreFriends() {
         User user = UserBuilder.aUser()
                 .friendsWith(PAO, JOBERT)
                 .build();
